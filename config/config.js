@@ -1,4 +1,8 @@
+
+const dotenv = require('dotenv');
+dotenv.config();
+
 module.exports = {
-    apiKey: process.env.API_KEY,
-    apiUrl: process.env.API_URL
+    apiUrl: process.env.API_URL,
+    apiKey: process.env.API_KEY
 };
