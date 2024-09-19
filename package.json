@@ -9,11 +9,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "��#\u0000 \u0000n\u0000o\u0000d\u0000e\u0000-\u0000w\u0000e\u0000b\u0000a\u0000p\u0000p\u0000\r\u0000 \u0000",
   "dependencies": {
     "axios": "^1.7.7",
     "dotenv": "^16.4.5",
-    "express": "^4.19.2"
+    "express": "^4.21.0"
   },
   "devDependencies": {
     "eslint": "^9.9.1",
