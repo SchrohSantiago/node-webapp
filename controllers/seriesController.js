@@ -1,35 +1,46 @@
-const seriesService = require('../services/seriesService');
+const axios = require('axios');
+const { apiUrl, apiKey } = require('../config/config');
 
 exports.listSeries = async (req, res) => {
     try {
-        const { page = 1, lang = 'en', category, year, order } = req.query;
-        const series = await seriesService.fetchSeries({ page, lang, category, year, order });
-        res.json(series);
+        const response = await axios.get(`${apiUrl}/tv/popular`, {
+            params: {api_key: apiKey},
+        });
+        res.status(200).json({status:'ok',data:response.data});
     } catch (error) {
-        res.status(500).json({ message: 'Error al obtener las series', error });
+        res.status(500).json({status:'error',msg:'Error al obtener las series'});
+        throw error;
     }
 };
 
-exports.getSerieById = async (req, res) => {
+exports.getSerieById = async (req,res) => {
     try {
         const { id } = req.params;
-        const serie = await seriesService.fetchSerieById(id);
-        if (!serie) {
-            return res.status(404).json({ message: 'Serie no encontrada' });
-        }
-        res.json(serie);
+        const response = await axios.get(`${apiUrl}/tv/${id}`, {
+            params: {
+                api_key: apiKey,
+            },
+        });
+        res.status(200).json({status:'ok',data:response.data});
     } catch (error) {
-        res.status(500).json({ message: 'Error al obtener la serie', error });
+        res.status(500).json({status:'error',msg:'Error al obtener la serie'});
+        throw error;
     }
 };
 
-exports.listTopRatedSeries = async (req, res) => {
+
+exports.listTopRatedSeries = async (req,res) => {
     try {
-        const { page = 1, lang = 'en' } = req.query;
-        const series = await seriesService.fetchTopRatedSeries({ page, lang });
-        res.json(series);
+        const response = await axios.get(`${apiUrl}/tv/top_rated`, {
+            params: {
+                api_key: apiKey,
+            },
+        });
+        res.status(200).json({status:'ok',data:response.data});
     } catch (error) {
-        res.status(500).json({ message: 'Error al obtener las series mejor valoradas', error });
+        res.status(500).json({status:'error',msg:'Error al obtener las series mejor valoradas'});
+        throw error;
     }
 };
+
 
