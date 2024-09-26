@@ -31,9 +31,12 @@ exports.getSerieById = async (req,res) => {
 
 exports.listTopRatedSeries = async (req,res) => {
     try {
+        const { page=1, lang='en' } = req.query;
         const response = await axios.get(`${apiUrl}/tv/top_rated`, {
             params: {
                 api_key: apiKey,
+                page,
+                language: lang,
             },
         });
         res.status(200).json({status:'ok',data:response.data});
