@@ -1,5 +1,4 @@
 // controllers/moviesController.js
-const moviesService = require('../services/moviesService');
 
 exports.getAll = async (req, res) => {
     try {
