@@ -40,29 +40,32 @@ exports.getAlternativeTitleById = async (req,res) => {
     }
 };
 
+// ordena por popularidad de mayor a menor 
+exports.getUpcomingMoviesByPopularity = async (req, res) => {
+    const { sortBy } = req.query; 
 
-exports.getUpcomingMoviesByLang = async (req, res) => {
     try {
-        const { original_language: lang, page } = req.query;
-
-        // Llamada a la API sin el parámetro 'original_language'
-        const { data } = await axios.get(`${apiUrl}/movie/upcoming`, {
-            params: { api_key: apiKey, page }
+        
+        const response = await axios.get(`${apiUrl}/movie/upcoming`, {
+            params: {
+                api_key: apiKey,
+                page: 1,
+            },
         });
+        let movies = response.data.results;
+        if (sortBy === 'popularity') {
+            movies = movies.sort((a, b) => b.popularity - a.popularity); 
+        }
 
-        // Verificamos si 'lang' está presente, si no filtramos
-        const movies = lang 
-            ? data.results.filter(movie => movie.original_language.toLowerCase() === lang.toLowerCase())
-            : data.results;
-
-        // Respuesta con las películas filtradas
-        res.status(200).json({ status: 'ok', data: movies });
+        res.status(200).json({
+            status: 'ok',
+            data: movies,
+        });
     } catch (error) {
-        res.status(500).json({ status: 'error', msg: 'Error al obtener las películas próximas a estrenar' });
+        res.status(500).json({
+            status: 'error',
+            msg: 'Error al obtener las películas',
+        });
     }
 };
-
-
-
-
 
