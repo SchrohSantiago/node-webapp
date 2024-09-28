@@ -4,9 +4,10 @@ const upcomingMoviesController = require('../controllers/upcomingMoviesControlle
 
 router.get('/', upcomingMoviesController.getUpcomingMovies); //http://localhost:3000/app/upcoming
 
+router.get('/language', upcomingMoviesController.getUpcomingMoviesByLanguage); //http://localhost:3008/app/upcoming/language?original_language=en
+
 router.get('/:id', upcomingMoviesController.getAlternativeTitleById); //http://localhost:3000/app/upcoming/(id)
 
-router.get('/', upcomingMoviesController.getUpcomingMoviesByPopularity); //http://localhost:3008/app/upcoming?sortBy=popularity
 
 
 
