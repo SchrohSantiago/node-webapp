@@ -89,7 +89,6 @@ exports.listFilteredSeriesByLanguage = async (req, res) => {
     try {
         const { page = 1, original_language } = req.query;
 
-        // Verifica que se haya proporcionado el parámetro original_language
         if (!original_language) {
             return res.status(400).json({
                 status: 'error',
@@ -97,18 +96,16 @@ exports.listFilteredSeriesByLanguage = async (req, res) => {
             });
         }
 
-        // Realiza la solicitud a TMDB utilizando el endpoint discover/tv
         const response = await axios.get(`${apiUrl}/discover/tv`, {
             params: {
                 api_key: apiKey,
                 page,
-                with_original_language: original_language // Filtra por idioma original
+                with_original_language: original_language 
             },
         });
 
         const series = response.data.results;
 
-        // Verifica si se encontraron series
         if (!series || series.length === 0) {
             return res.status(404).json({
                 status: 'error',
@@ -116,7 +113,6 @@ exports.listFilteredSeriesByLanguage = async (req, res) => {
             });
         }
 
-        // Envía la respuesta con las series filtradas
         return res.status(200).json({
             status: 'ok',
             data: series
