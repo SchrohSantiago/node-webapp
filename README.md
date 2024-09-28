@@ -48,16 +48,14 @@ URL: app/movies/:id/alternative_titles
 Método: GET
 Descripción: Obtiene una lista de títulos alternativos para una película específica utilizando su ID.
 
-URL: app/movies/upcoming/popularity
 Método: GET
-Descripción: Obtiene una lista de películas próximas ordenadas por popularidad.
+URL: /app/upcoming/language?original_language=en
+
+Descripción: Obtiene una lista de las películas próximas filtradas por idioma original.
 
 Parámetros:
-sortBy: Especifica cómo se ordenarán las películas (solo 'popularity' en este caso).
-
-# http://localhost:3008/app/upcoming?sortBy=popularity 
-
-
+page: Número de página (opcional, por defecto 1).
+original_language: Idioma original (obligatorio).
 
 # ENDPOINTS = PEOPLE
 
@@ -80,3 +78,37 @@ Parámetros:
 id: ID de la persona.
 
 # ENDPOINT = SERIES
+
+URL: app/series/popular
+
+Método: GET
+
+Descripción: Obtiene una lista de las series más populares en la base de datos.
+
+
+URL: /series/:id
+
+Método: GET
+
+Descripción: Obtiene los detalles de una serie específica utilizando su ID.
+
+
+URL: /series/top_rated
+
+Método: GET
+
+Descripción: Obtiene una lista de las series mejor valoradas en la base de datos.
+
+
+URL: app/series/lenguaje?original_language=es
+
+Método: GET
+
+Descripción: Obtiene una lista de series filtradas por idioma original.
+
+Parámetros:
+
+page: Número de página (opcional, por defecto 1).
+original_language: Idioma original (obligatorio).
+
+
