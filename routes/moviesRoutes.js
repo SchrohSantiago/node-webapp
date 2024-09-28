@@ -1,14 +1,12 @@
-// routes/moviesRoutes.js
 const express = require('express');
 const router = express.Router();
 const moviesController = require('../controllers/moviesController');
 
-// Definir todas las rutas
-router.get('/movies', moviesController.getAll);
-router.get('/movies/:id', moviesController.getById);
-router.get('/movie/popular', moviesController.getPopulars);
-router.get('/movie/:movie_id/credits', moviesController.getCredits);
-router.get('/movie/:movie_id/recommendations', moviesController.getRecommendations);
-router.get('/movies/adult', moviesController.getAdultMovies);
+// Definir las rutas de películas
+router.get('/popular', moviesController.getPopulars);
+router.get('/:movie_id/credits', moviesController.getCredits);
+router.get('/:movie_id/recommendations', moviesController.getRecommendations);
+router.get('/genre', moviesController.getMoviesByGenre);
+
 
 module.exports = router;
