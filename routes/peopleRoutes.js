@@ -4,7 +4,7 @@ const peopleController = require('../controllers/peopleController');
 
 
 
-router.get('/filtered', peopleController.listFilteredPeopleByDepartment);
+router.get('/department', peopleController.listFilteredPeopleByDepartment);
 
 router.get('/', peopleController.listPeople);
 
