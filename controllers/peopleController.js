@@ -31,9 +31,10 @@ exports.getPersonById = async (req,res) => {
 
 exports.listFilteredPeopleByDepartment = async (req, res) => {
     try {
-        const { page = 1, known_for_department } = req.query;
-
-        // Verificamos que se haya proporcionado el parámetro known_for_department
+        
+        const known_for_department = req.query.known_for_department;
+        console.log('known_for_department:', known_for_department);
+        
         if (!known_for_department) {
             return res.status(400).json({
                 status: 'error',
@@ -41,18 +42,20 @@ exports.listFilteredPeopleByDepartment = async (req, res) => {
             });
         }
 
-        // Hacemos la solicitud a la API para obtener personas filtradas por departamento
         const response = await axios.get(`${apiUrl}/discover/person`, {
             params: {
                 api_key: apiKey,
-                page,
-                with_known_for_department: known_for_department // Usamos el parámetro correcto
+                with_departament: known_for_department,
+                page: 1, 
             },
         });
 
-        const people = response.data.results;
+        const people = response.data.results.filter(person =>
+            person.known_for_department === known_for_department
+        );
 
-        // Verificamos si hay resultados
+        console.log(people)
+
         if (!people || people.length === 0) {
             return res.status(404).json({
                 status: 'error',
