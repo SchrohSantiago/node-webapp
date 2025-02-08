@@ -33,7 +33,6 @@ exports.listFilteredPeopleByDepartment = async (req, res) => {
     try {
         
         const known_for_department = req.query.known_for_department;
-        console.log('known_for_department:', known_for_department);
         
         if (!known_for_department) {
             return res.status(400).json({
@@ -54,7 +53,6 @@ exports.listFilteredPeopleByDepartment = async (req, res) => {
             person.known_for_department === known_for_department
         );
 
-        console.log(people)
 
         if (!people || people.length === 0) {
             return res.status(404).json({
@@ -68,7 +66,7 @@ exports.listFilteredPeopleByDepartment = async (req, res) => {
             data: people
         });
     } catch (error) {
-        console.error('Error al hacer la solicitud a TMDB:', error);
+        
 
         if (error.response) {
             return res.status(error.response.status).json({

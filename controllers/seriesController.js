@@ -2,7 +2,6 @@ const axios = require('axios');
 const { apiUrl, apiKey } = require('../config/config');
 
 exports.listSeries = async (req, res) => {
-    console.log('listSeries');
     try {
         const response = await axios.get(`${apiUrl}/tv/popular`, {
             params: {api_key: apiKey},
@@ -14,7 +13,6 @@ exports.listSeries = async (req, res) => {
 };
 
 exports.getSerieById = async (req,res) => {
-    console.log('getSerieById');
     try {
         const { id } = req.params;
         const response = await axios.get(`${apiUrl}/tv/${id}`, {
@@ -31,7 +29,6 @@ exports.getSerieById = async (req,res) => {
 
 
 exports.listTopRatedSeries = async (req,res) => {
-    console.log('listTopRatedSeries');
     try {
         const { page=1, lang='en' } = req.query;
         const response = await axios.get(`${apiUrl}/tv/top_rated`, {
@@ -48,7 +45,6 @@ exports.listTopRatedSeries = async (req,res) => {
 };
 
 exports.getMoviesByGenre = async (req, res) => { 
-    console.log('getMoviesByGenre');
     /* 28: Acción   ID 
     12: Aventura
     16: Animación
@@ -61,7 +57,7 @@ exports.getMoviesByGenre = async (req, res) => {
         try { // http://localhost:3008/app/movies/genre?genre_id=2
     
             const genre_id = req.query.genre_id; 
-            console.log(genre_id);
+    
     
             if (!genre_id) {
                 return res.status(400).json({ status: 'error', msg: 'El genre_id es obligatorio' });
@@ -118,7 +114,6 @@ exports.listFilteredSeriesByLanguage = async (req, res) => {
             data: series
         });
     } catch (error) {
-        console.error('Error al hacer la solicitud a TMDB:', error);
 
         if (error.response) {
             return res.status(error.response.status).json({
